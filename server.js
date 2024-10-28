@@ -1,41 +1,39 @@
 const express = require("express");
-const { main } = require("../models/index");
-const productRoute = require("../router/product");
-const storeRoute = require("../router/store");
-const purchaseRoute = require("../router/purchase");
-const salesRoute = require("../router/sales");
-const catalogeRoute = require("../router/cataloge");
-const catalogeDesignRoute = require("../router/catalogeDesign");
-
 const cors = require("cors");
-const User = require("../models/users");
-const Product = require("../models/product");
+const path = require('path');
 
+// Fix the imports to use proper paths
+const { main } = require("./models/index");
+const productRoute = require("./router/product");
+const storeRoute = require("./router/store");
+const purchaseRoute = require("./router/purchase");
+const salesRoute = require("./router/sales");
+const catalogeRoute = require("./router/cataloge");
+const catalogeDesignRoute = require("./router/catalogeDesign");
+const User = require("./models/users");
+const Product = require("./models/product");
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
+
 main();
 app.use(express.json());
 app.use(cors());
 
 // Store API
 app.use("/api/store", storeRoute);
-
 // Products API
 app.use("/api/product", productRoute);
-
 // Purchase API
 app.use("/api/purchase", purchaseRoute);
-
 // Sales API
 app.use("/api/sales", salesRoute);
-
 // cataloge api 
 app.use("/api/cataloge", catalogeRoute);
-
 // cataloge Design api 
 app.use("/api/cataloge_design", catalogeDesignRoute);
 
+// Rest of your code remains the same...
 
 // ------------- Signin --------------
 let userAuthCheck;
