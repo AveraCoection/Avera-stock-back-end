@@ -9,7 +9,7 @@ const catalogeDesignRoute = require("../router/catalogeDesign");
 
 const cors = require("cors");
 const User = require("../models/users");
-const Product = require("../models/Product");
+const Product = require("../models/product");
 
 
 const app = express();
