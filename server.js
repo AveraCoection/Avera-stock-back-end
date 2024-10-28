@@ -3,16 +3,16 @@ const cors = require("cors");
 const path = require('path');
 
 // Fix the imports to use proper paths
-const { main } = require("./models/index");
-const productRoute = require("./router/product");
-const storeRoute = require("./router/store");
+const { main } = require('@/models/index');
+const productRoute = require('@/router/product');
+const storeRoute = require('@/router/store');
 const purchaseRoute = require("./router/purchase");
 const salesRoute = require("./router/sales");
 const catalogeRoute = require("./router/cataloge");
 const catalogeDesignRoute = require("./router/catalogeDesign");
 const User = require("./models/users");
-const Product = require("./models/product");
-
+const Product = require('@/models/Product');
+const productController = require('@/controller/product');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
