@@ -1,15 +1,15 @@
 const express = require("express");
-const { main } = require("../models/index");
-const productRoute = require("../router/product");
-const storeRoute = require("../router/store");
-const purchaseRoute = require("../router/purchase");
-const salesRoute = require("../router/sales");
-const catalogeRoute = require("../router/cataloge");
-const catalogeDesignRoute = require("../router/catalogeDesign");
+const { main } = require("./models/index");
+const productRoute = require("./router/product");
+const storeRoute = require("./router/store");
+const purchaseRoute = require("./router/purchase");
+const salesRoute = require("./router/sales");
+const catalogeRoute = require("./router/cataloge");
+const catalogeDesignRoute = require("./router/catalogeDesign");
 
 const cors = require("cors");
-const User = require("../models/users");
-const Product = require("../models/product");
+const User = require("./models/users");
+const Product = require("./models/Product.js");
 
 
 const app = express();
