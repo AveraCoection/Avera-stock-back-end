@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "/server.js"
     }
-  ],
-  "hooks": {
-    "post-deploy": "echo 'Deployment completed. Exiting process.'"
-  }
+  ]
 }
