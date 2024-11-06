@@ -36,7 +36,6 @@ app.use("/api/cataloge", catalogeRoute);
 // cataloge Design api 
 app.use("/api/cataloge_design", catalogeDesignRoute);
 
-
 // ------------- Signin --------------
 let userAuthCheck;
 app.post("/api/login", async (req, res) => {
