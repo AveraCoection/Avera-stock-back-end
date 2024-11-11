@@ -74,7 +74,7 @@ app.post("/api/register", (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
-    phoneNumber: req.body.phoneNumber,
+    // phoneNumber: req.body.phoneNumber,
     imageUrl: req.body.imageUrl,
   });
 
