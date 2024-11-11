@@ -12,15 +12,20 @@ const CatalogeDesignSchema = new mongoose.Schema(
     //   required: true,
     // },
      cataloge: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to Cataloge collection
+      type: mongoose.Schema.Types.ObjectId, 
       ref: "Cataloge",
       required: true,
     },
     design_number: {
       type: String,
       required: true,
+      unique : true,
     },
     stock: {
+        type: Number,
+        required: true,
+      },
+      khazana_stock: {
         type: Number,
         required: true,
       },
