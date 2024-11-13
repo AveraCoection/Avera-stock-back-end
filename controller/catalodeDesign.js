@@ -1,5 +1,4 @@
 const CatalogeDesign = require("../models/catalogDesign");
-
 // Add Post
 const addCatalogeDesign = (req, res) => {
   const addCataloge = new CatalogeDesign({
@@ -7,8 +6,8 @@ const addCatalogeDesign = (req, res) => {
     design_number: req.body.design_number,
     stock: req.body.stock,
     cataloge: req.body.cataloge,
+    khazana_stock : req.body.khazana_stock,
   });
-
   addCataloge
     .save()
     .then((result) => {
@@ -50,29 +49,30 @@ const editDesign = (req, res) => {
 const updateDesign = async (req, res) => {
   const sellStock = Number(req.body.sell_stock); 
   const totalStock = Number(req.body.stock);
-  let remainingStock = 0;
+  const totalKhazana = Number(req.body.khazana_stock)
+  // let remainingStock = 0;
 
-  if (totalStock < sellStock) {
-    return res.status(400).send("Sold stock cannot be greater than total stock");
-  }
+  // if (totalStock < sellStock) {
+  //   return res.status(400).send("Sold stock cannot be greater than total stock");
+  // }
 
-  if (sellStock > 0) {
-    remainingStock = totalStock - sellStock;
-  } else if (sellStock === 0){
-    remainingStock = totalStock
-  }
-  else {
-    const design = await CatalogeDesign.findById(req.params.id);
-    if (!design) {
-      return res.status(404).send("Design not found");
-    }
+  // if (sellStock > 0) {
+  //   remainingStock = totalStock - sellStock;
+  // } else if (sellStock === 0){
+  //   remainingStock = totalStock
+  // }
+  // else {
+  //   const design = await CatalogeDesign.findById(req.params.id);
+  //   if (!design) {
+  //     return res.status(404).send("Design not found");
+  //   }
     
-    remainingStock = design.stock + totalStock; 
+  //   remainingStock = design.stock + totalStock; 
 
-  }
+  // }
   CatalogeDesign.findByIdAndUpdate(
     req.params.id, 
-    { stock: remainingStock }, 
+    { stock: totalStock, khazana_stock: totalKhazana}, 
     { new: true }
   )
   .then((updatedResult) => {
@@ -84,9 +84,8 @@ const updateDesign = async (req, res) => {
   .catch((error) => {
     res.status(400).json({ error: error.message });
   });
-};
 
-
+}
 
 module.exports = {
   addCatalogeDesign,
