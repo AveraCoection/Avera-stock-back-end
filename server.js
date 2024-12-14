@@ -6,6 +6,8 @@ const purchaseRoute = require("./router/purchase");
 const salesRoute = require("./router/sales");
 const catalogeRoute = require("./router/cataloge");
 const catalogeDesignRoute = require("./router/catalogeDesign");
+const buyerRoute = require("./router/buyer");
+const soldRoute = require("./router/SoldCataloge");
 
 const cors = require("cors");
 const User = require("./models/users");
@@ -35,6 +37,12 @@ app.use("/api/cataloge", catalogeRoute);
 
 // cataloge Design api 
 app.use("/api/cataloge_design", catalogeDesignRoute);
+
+// buyer api
+app.use("/api/buyer", buyerRoute);
+
+// sold cataloge api
+app.use("/api/sold_design", soldRoute);
 
 // ------------- Signin --------------
 let userAuthCheck;

@@ -7,6 +7,7 @@ const addCatalogeDesign = (req, res) => {
     stock: req.body.stock,
     cataloge: req.body.cataloge,
     khazana_stock : req.body.khazana_stock,
+    price : req.body.price
   });
   addCataloge
     .save()
@@ -50,6 +51,7 @@ const updateDesign = async (req, res) => {
   const sellStock = Number(req.body.sell_stock); 
   const totalStock = Number(req.body.stock);
   const totalKhazana = Number(req.body.khazana_stock)
+  const changePrice = Number(req.body.price)
   // let remainingStock = 0;
 
   // if (totalStock < sellStock) {
@@ -72,7 +74,7 @@ const updateDesign = async (req, res) => {
   // }
   CatalogeDesign.findByIdAndUpdate(
     req.params.id, 
-    { stock: totalStock, khazana_stock: totalKhazana}, 
+    { stock: totalStock, khazana_stock: totalKhazana , price : changePrice}, 
     { new: true }
   )
   .then((updatedResult) => {

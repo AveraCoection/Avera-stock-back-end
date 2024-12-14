@@ -7,10 +7,7 @@ const CatalogeDesignSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
-    // cataloge_number: {
-    //   type: String,
-    //   required: true,
-    // },
+   
      cataloge: {
       type: mongoose.Schema.Types.ObjectId, 
       ref: "Cataloge",
@@ -31,7 +28,11 @@ const CatalogeDesignSchema = new mongoose.Schema(
       },
       sell_stock : {
         type: Number,
+      },
+      price : {
+        type : Number,
       }
+
   },
   { timestamps: true }
 );
