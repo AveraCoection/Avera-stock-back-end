@@ -26,8 +26,10 @@ const addSolds = async (req, res) => {
       userID: req.body.userID,
       buyer: req.body.buyer, 
       catalogues: req.body.catalogues,
+      grandTotal : req.body.grandTotal,
+      buyer_phone :req.body.buyer_phone,
+      inVoice:req.body.inVoice,
     });
-
     // Save the Sold record
     const result = await addSold.save();
     res.status(200).json({ message: "Sale added successfully", data: result });
@@ -43,4 +45,26 @@ const getSoldData = async (req, res) => {
     .sort({ _id: -1 })
   res.json(findAllSalesData);
 };
-module.exports = { addSolds ,getSoldData };
+
+const deleteSelectedBill = async (req, res) => {
+  const deleteBill = await Sold.deleteOne(
+    { _id: req.params.id }
+  );
+  res.send(deleteBill);
+};
+
+const editBill = (req, res) => {
+  Sold.findById(req.params.id)
+    .then((billDetail) => {
+      if (!billDetail) {
+        return res.status(404).json({ message: "Bill not found" });
+      }
+
+      res.json(billDetail);
+    })
+    .catch((error) => {
+      res.status(500).json({ message: "Server error", error });
+    });
+};
+
+module.exports = { addSolds ,getSoldData ,deleteSelectedBill , editBill};

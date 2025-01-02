@@ -11,6 +11,18 @@ const SoldSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.Mixed,
             required: true,
         },
+        grandTotal :{
+            type: Number,
+            required: true,
+        },
+        inVoice:{
+            type: Number,
+            required: true, 
+        },
+        buyer_phone:{
+            type: Number,
+            required: true,
+        },
         catalogues: [
             {
                 catalogeId: {

@@ -8,6 +8,7 @@ const catalogeRoute = require("./router/cataloge");
 const catalogeDesignRoute = require("./router/catalogeDesign");
 const buyerRoute = require("./router/buyer");
 const soldRoute = require("./router/SoldCataloge");
+const inVoiceRoute = require("./router/inVoice")
 
 const cors = require("cors");
 const User = require("./models/users");
@@ -43,6 +44,8 @@ app.use("/api/buyer", buyerRoute);
 
 // sold cataloge api
 app.use("/api/sold_design", soldRoute);
+
+app.use("/api/in_voice", inVoiceRoute);
 
 // ------------- Signin --------------
 let userAuthCheck;
