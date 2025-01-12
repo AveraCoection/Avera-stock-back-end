@@ -21,7 +21,6 @@ const SoldSchema = new mongoose.Schema(
         },
         buyer_phone:{
             type: Number,
-            required: true,
         },
         catalogues: [
             {
