@@ -85,25 +85,36 @@ app.post("/api/register", (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
-    // phoneNumber: req.body.phoneNumber,
     imageUrl: req.body.imageUrl,
   });
 
   registerUser
     .save()
     .then((result) => {
-      res.status(200).send(result);
-      alert("Signup Successfull");
+      res.status(200).send({ message: "Signup successful", user: result });
+      // Optional: alert should be client-side, not in the backend
     })
-    .catch((err) => console.log("Signup: ", err));
-  console.log("request: ", req.body);
+    .catch((err) => {
+      console.log("Signup error: ", err);
+
+      // Check if the error is a duplicate key error
+      if (err.code === 11000) {
+        return res.status(400).send({ message: "Email is already registered" });
+      }
+
+      // For other errors, send a generic error message
+      res.status(500).send({ message: "Internal server error" });
+    });
+
+  console.log("Request: ", req.body);
 });
 
-app.get("/", async (req,res)=>{
+
+app.get("/", async (req, res) => {
   res.send("hello developers")
 })
-app.get("/testget", async (req,res)=>{
-  const result = await Product.findOne({ _id: '6429979b2e5434138eda1564'})
+app.get("/testget", async (req, res) => {
+  const result = await Product.findOne({ _id: '6429979b2e5434138eda1564' })
   console.log("result");
   res.json(result)
 })
