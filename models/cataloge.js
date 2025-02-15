@@ -11,7 +11,9 @@ const CatalogeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-   
+    total_khazana :{
+    type : Number
+   }
   },
   { timestamps: true }
 );
