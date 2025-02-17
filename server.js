@@ -9,14 +9,15 @@ const catalogeDesignRoute = require("./router/catalogeDesign");
 const buyerRoute = require("./router/buyer");
 const soldRoute = require("./router/SoldCataloge");
 const inVoiceRoute = require("./router/inVoice")
-
+const userRoutes = require("./router/users")
 const cors = require("cors");
 const User = require("./models/users");
 const Product = require("./models/product");
 
+require("dotenv").config()
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT;
 main();
 app.use(express.json());
 app.use(cors());
@@ -47,31 +48,54 @@ app.use("/api/sold_design", soldRoute);
 
 app.use("/api/in_voice", inVoiceRoute);
 
+app.use("/api/auth" , userRoutes)
 // ------------- Signin --------------
-let userAuthCheck;
-app.post("/api/login", async (req, res) => {
-  console.log(req.body);
-  // res.send("hi");
-  try {
-    const user = await User.findOne({
-      email: req.body.email,
-      password: req.body.password,
-    });
-    console.log("USER: ", user);
-    if (user) {
-      res.send(user);
-      userAuthCheck = user;
-    } else {
-      res.status(401).send("Invalid Credentials");
-      userAuthCheck = null;
-    }
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
+// let userAuthCheck;
+// app.post("/api/login", async (req, res) => {
+//   console.log(req.body);
+//   try {
+//     const user = await User.findOne({
+//       email: req.body.email,
+//       password: req.body.password,
+//     });
+//     if (user) {
+//       res.send(user);
+//       userAuthCheck = user;
+//     } else {
+//       res.status(401).send("Invalid Credentials");
+//       userAuthCheck = null;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.send(error);
+//   }
+// });
 
 // Getting User Details of login user
+
+
+// app.post("/api/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const user = await User.findOne({ email });
+//     console.log(user , "user")
+//     // if (!user) return res.status(401).json({ message: "Invalid Credentials" });
+
+//     // const isMatch = await bcrypt.compare(password, user.password);
+//     // if (!isMatch) return res.status(401).json({ message: "Invalid Credentials" });
+
+//     // // const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+//     // res.json({ message: "Login Successful", user });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Server Error" });
+//   }
+// });
+
+
 app.get("/api/login", (req, res) => {
   res.send("hello")
   // res.send(userAuthCheck);
@@ -79,35 +103,40 @@ app.get("/api/login", (req, res) => {
 // ------------------------------------
 
 // Registration API
-app.post("/api/register", (req, res) => {
-  let registerUser = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    imageUrl: req.body.imageUrl,
-  });
 
-  registerUser
-    .save()
-    .then((result) => {
-      res.status(200).send({ message: "Signup successful", user: result });
-      // Optional: alert should be client-side, not in the backend
-    })
-    .catch((err) => {
-      console.log("Signup error: ", err);
 
-      // Check if the error is a duplicate key error
-      if (err.code === 11000) {
-        return res.status(400).send({ message: "Email is already registered" });
-      }
+// app.post("/api/register", async (req, res) => {
+//   try {
+//     const { firstName, lastName, email, password, imageUrl } = req.body;
 
-      // For other errors, send a generic error message
-      res.status(500).send({ message: "Internal server error" });
-    });
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
+//     console.log(password, "password")
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     console.log(hashedPassword, "hashedPassword")
+//     const registerUser = new User({
+//       firstName,
+//       lastName,
+//       email,
+//       password: hashedPassword,
+//       imageUrl,
+//     });
 
-  console.log("Request: ", req.body);
-});
+//     const savedUser = await registerUser.save();
+//     res.status(201).json({ message: "Signup successful", user: savedUser });
+
+//   } catch (err) {
+//     console.error("Signup error: ", err);
+//     if (err.code === 11000) {
+//       return res.status(400).json({ message: "Email is already registered" });
+//     }
+
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
 
 
 app.get("/", async (req, res) => {
