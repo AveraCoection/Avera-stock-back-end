@@ -10,6 +10,7 @@ const buyerRoute = require("./router/buyer");
 const soldRoute = require("./router/SoldCataloge");
 const inVoiceRoute = require("./router/inVoice")
 const userRoutes = require("./router/users")
+const costPriceRouter = require("./router/costPrice")
 const cors = require("cors");
 const User = require("./models/users");
 const Product = require("./models/product");
@@ -49,6 +50,7 @@ app.use("/api/sold_design", soldRoute);
 app.use("/api/in_voice", inVoiceRoute);
 
 app.use("/api/auth" , userRoutes)
+app.use("/api/cost_price" , costPriceRouter)
 // ------------- Signin --------------
 // let userAuthCheck;
 // app.post("/api/login", async (req, res) => {

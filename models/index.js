@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 
-const uri = "mongodb+srv://averacollection147:GBN0pCqQ7SMblwbL@cluster0.mhivx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const uri = "mongodb+srv://aqsashamshad2005:c4qWcdlu61epDEsd@cluster0.2hwuq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// const uri = "mongodb+srv://averacollection147:GBN0pCqQ7SMblwbL@cluster0.mhivx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 
 async function main() {

@@ -29,6 +29,7 @@ const addSolds = async (req, res) => {
       grandTotal : req.body.grandTotal,
       buyer_phone :req.body.buyer_phone,
       inVoice:req.body.inVoice,
+      paid : req.body.paid
     });
     // Save the Sold record
     const result = await addSold.save();
@@ -67,4 +68,23 @@ const editBill = (req, res) => {
     });
 };
 
-module.exports = { addSolds ,getSoldData ,deleteSelectedBill , editBill};
+
+const updateBill = (req, res) => {
+  Sold.findByIdAndUpdate(
+    { _id: req.params.id },                             
+    { paid: req.body.paid },    
+    { new: true }                                     
+  )
+    .then((updatedResult) => {
+      if (!updatedResult) {
+
+        return res.status(404).send("Cost Price not found");
+      }
+      res.json(updatedResult);
+    })
+    .catch((error) => {
+      res.status(400).json({ error: error.message });
+    });
+};
+
+module.exports = { addSolds ,getSoldData ,deleteSelectedBill , editBill , updateBill};

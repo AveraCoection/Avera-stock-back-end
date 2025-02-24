@@ -22,6 +22,11 @@ const CatalogeDesignSchema = new mongoose.Schema(
         type: Number,
         required: true,
       },
+      cost_price: {
+        type: Number,
+        required: true,
+        default : 0
+      },
       khazana_stock: {
         type: Number,
         required: true,

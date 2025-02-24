@@ -19,6 +19,9 @@ const SoldSchema = new mongoose.Schema(
             type: Number,
             required: true, 
         },
+        paid :{
+            type : Boolean,
+        },
         buyer_phone:{
             type: Number,
         },
