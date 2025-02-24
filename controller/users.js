@@ -141,7 +141,7 @@ const forgetPassword = async (req, res) => {
         }
     });
 
-    const resetURL = `http://localhost:3000/reset-password/${token}`;
+    const resetURL = `https://avera-stock-back-end.vercel.app/reset-password/${token}`;
 
     await transporter.sendMail({
         from: "aqsashamshad2005@gmail.com",
