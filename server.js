@@ -7,6 +7,7 @@ const salesRoute = require("./router/sales");
 const catalogeRoute = require("./router/cataloge");
 const catalogeDesignRoute = require("./router/catalogeDesign");
 const buyerRoute = require("./router/buyer");
+const commissionRoute = require("./router/commision");
 const soldRoute = require("./router/SoldCataloge");
 const inVoiceRoute = require("./router/inVoice")
 const userRoutes = require("./router/users")
@@ -43,6 +44,9 @@ app.use("/api/cataloge_design", catalogeDesignRoute);
 
 // buyer api
 app.use("/api/buyer", buyerRoute);
+
+// commision api  
+app.use("/api/commision", commissionRoute);
 
 // sold cataloge api
 app.use("/api/sold_design", soldRoute);

@@ -10,6 +10,8 @@ app.delete("/delete_buyer/:id",buyer.deleteSelectedBuyer );
 
 app.get("/edit_buyer/:id",buyer.editBuyer );
 
+app.get("/bill-transaction/:userId",buyer.getBuyerPayments );
+
 app.put("/update_buyer/:id",buyer.updateBuyer );
 
 

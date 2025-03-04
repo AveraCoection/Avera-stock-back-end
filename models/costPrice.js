@@ -15,6 +15,14 @@ const CostPriceSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        commission_name: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Commission",
+        },
+        commission_type: {
+            type: String,
+            enum: ["Sale", "Agent"],
+        },
         design_bill: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "CostPrice",

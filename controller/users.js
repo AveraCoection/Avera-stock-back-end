@@ -128,9 +128,9 @@ const forgetPassword = async (req, res) => {
     const isStaff = user.staffCredentials.some(staff => staff.email === email);
 
     const token = jwt.sign(
-        { id: user._id, email, isStaff }, // Store whether it's staff or main user
+        { id: user._id, email, isStaff },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "7d" }
     );
 
     const transporter = nodemailer.createTransport({
