@@ -77,7 +77,6 @@ const updateBuyer = (req, res) => {
     });
 };
 
-
 const getBuyerPayments = async (req, res) => {
   try {
     const { buyerID } = req.query;
@@ -87,15 +86,19 @@ const getBuyerPayments = async (req, res) => {
     }
 
     const buyer = await Buyer.findById(buyerID).select("buyer_name transactions remaining_amount totalBill");
+    
     if (!buyer) {
       return res.status(404).json({ error: "Buyer not found" });
     }
-console.log(buyer)
+
+    // Sorting transactions from new to old based on date
+    const sortedTransactions = buyer.transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     res.json({
       buyerName: buyer.buyer_name,
-      remaining_amount:buyer.remaining_amount,
+      remaining_amount: buyer.remaining_amount,
       totalBill: buyer.totalBill,
-      paymentHistory: buyer.transactions
+      paymentHistory: sortedTransactions
     });
 
   } catch (error) {
