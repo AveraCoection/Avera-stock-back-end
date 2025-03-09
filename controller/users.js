@@ -141,7 +141,7 @@ const forgetPassword = async (req, res) => {
         }
     });
 
-    const resetURL = `https://avera-stock-back-end.vercel.app/reset-password/${token}`;
+    const resetURL = `${process.env.DEV_BASE_LIVE}/reset-password/${token}`;
 
     await transporter.sendMail({
         from: "aqsashamshad2005@gmail.com",
@@ -221,7 +221,6 @@ const getStaffList = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
 
 const getStaffDelete = async (req, res) => {
     const { userId, staffId } = req.params; // Get userId and staffId from URL params
