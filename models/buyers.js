@@ -14,8 +14,32 @@ const BuyersSchema = new mongoose.Schema(
     phone_number :{
         type : Number,
         required : true,
-    }
+    },
+    totalBill: {
+      type: Number,
+      default: 0,
+    },
+    remaining_amount: {
+      type: Number,
+      default: 0,
+    },
+    paid_amount: {
+      type: Number,
+      default: 0,
+    },
    
+    transactions: [
+      {
+        amountPaid: {
+          type: Number,
+          required: true,
+        },
+        date: {
+          type: Date,
+          default: Date.now, 
+        },
+      }
+      ]
   },
   { timestamps: true }
 );

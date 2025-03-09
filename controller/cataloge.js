@@ -1,3 +1,4 @@
+const CatalogeDesign = require("../models/catalogDesign");
 const Cataloge = require("../models/cataloge");
 
 // Add Post
@@ -25,7 +26,22 @@ const getAllCataloge = async (req, res) => {
     const findAllCataloge = await Cataloge.find({
       userID: req.params.userId,
     })
-    res.json(findAllCataloge);
+    const catalogDesign = await Promise.all(
+      findAllCataloge.map(async (catalog)=>{
+
+        const design = await CatalogeDesign.find({cataloge : catalog._id })
+        const totalKhazana = design.reduce((sum , design)=> sum + (design.khazana_stock || 0 ),0)
+        return {
+          _id: catalog._id,
+          userID: catalog.userID,
+          cataloge_number: catalog.cataloge_number,
+          createdAt: catalog.createdAt,
+          updatedAt: catalog.updatedAt,
+          total_khazana: totalKhazana, 
+        }
+      })
+    )
+    res.json(catalogDesign);
   };
 
   // Delete CATALOGE
@@ -37,20 +53,45 @@ const getAllCataloge = async (req, res) => {
   };
 
   // Edit 
-  const editCataloge = (req, res) => {
-    Cataloge.findById(req.params.id)
-      .then((cataloge) => {
-        if (!cataloge) {
-          return res.status(404).json({ message: "Catalog not found" });
-        }
+  // const editCataloge = (req, res) => {
+  //   Cataloge.findById(req.params.id)
+  //     .then((cataloge) => {
+  //       if (!cataloge) {
+  //         return res.status(404).json({ message: "Catalog not found" });
+  //       }
   
-        res.json(cataloge);
-      })
-      .catch((error) => {
-        res.status(500).json({ message: "Server error", error });
+  //       res.json(cataloge);
+  //     })
+  //     .catch((error) => {
+  //       res.status(500).json({ message: "Server error", error });
+  //     });
+  // };
+  
+  const editCataloge = async (req, res) => {
+    try {
+      const cataloge = await Cataloge.findById(req.params.id);
+  
+      if (!cataloge) {
+        return res.status(404).json({ message: "Catalog not found" });
+      }
+  
+      const designs = await CatalogeDesign.find({ cataloge: cataloge._id });
+  
+      const totalKhazana = designs.reduce((sum, design) => sum + (design.khazana_stock || 0), 0);
+  
+      res.json({
+        _id: cataloge._id,
+        userID: cataloge.userID,
+        cataloge_number: cataloge.cataloge_number,
+        createdAt: cataloge.createdAt,
+        updatedAt: cataloge.updatedAt,
+        total_khazana: totalKhazana,
       });
-  };
   
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error });
+    }
+  };
   
 
   // update Post
