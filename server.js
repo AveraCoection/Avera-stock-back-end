@@ -15,6 +15,7 @@ const costPriceRouter = require("./router/costPrice")
 const cors = require("cors");
 const User = require("./models/users");
 const Product = require("./models/product");
+const reportRoute = require("./router/report");
 
 require("dotenv").config()
 
@@ -54,7 +55,11 @@ app.use("/api/sold_design", soldRoute);
 app.use("/api/in_voice", inVoiceRoute);
 
 app.use("/api/auth" , userRoutes)
+
 app.use("/api/cost_price" , costPriceRouter)
+
+app.use("/api/report", reportRoute);
+
 // ------------- Signin --------------
 // let userAuthCheck;
 // app.post("/api/login", async (req, res) => {
