@@ -15,7 +15,7 @@ const SoldSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        discount :{
+        discount :{ 
             type: Number,
             required: true,
 
