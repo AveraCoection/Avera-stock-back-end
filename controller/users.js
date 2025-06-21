@@ -124,7 +124,6 @@ const forgetPassword = async (req, res) => {
         return res.status(401).json({ errors: "Invalid Credentials" });
     }
 
-    // Check if it's a staff email
     const isStaff = user.staffCredentials.some(staff => staff.email === email);
 
     const token = jwt.sign(

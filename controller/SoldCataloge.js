@@ -25,7 +25,6 @@ const addSolds = async (req, res) => {
         return res.status(400).json({ message: `Not enough stock for design ${designId}` });
       }
     }
-
     // Step 2: Save the new bill
     const addSold = new Sold({
       userID: req.body.userID,
@@ -33,7 +32,8 @@ const addSolds = async (req, res) => {
       catalogues: req.body.catalogues,
       grandTotal: req.body.grandTotal,
       buyer_phone: req.body.buyer_phone,
-      inVoice: req.body.inVoice
+      inVoice: req.body.inVoice,
+      discount: req.body.discount
     });
 
     await addSold.save();
@@ -58,6 +58,7 @@ const addSolds = async (req, res) => {
     });
     res.status(200).json({
       message: "Sale added successfully",
+      addSold,
       billId: addSold._id,
       totalBill: totalBillAmount,
       remainingAmount: remainingAmount
