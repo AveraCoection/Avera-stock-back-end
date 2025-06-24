@@ -33,7 +33,8 @@ const addSolds = async (req, res) => {
       grandTotal: req.body.grandTotal,
       buyer_phone: req.body.buyer_phone,
       inVoice: req.body.inVoice,
-      discount: req.body.discount
+      discount: req.body.discount,
+      deliveryCharges :req.body.deliveryCharges
     });
 
     await addSold.save();

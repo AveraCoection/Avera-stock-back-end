@@ -15,11 +15,6 @@ const SoldSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        discount :{ 
-            type: Number,
-            required: true,
-
-        },
         inVoice:{
             type: Number,
             required: true, 
@@ -28,6 +23,9 @@ const SoldSchema = new mongoose.Schema(
             type : Boolean,
         },
         buyer_phone:{
+            type: Number,
+        },
+           deliveryCharges:{
             type: Number,
         },
         catalogues: [
