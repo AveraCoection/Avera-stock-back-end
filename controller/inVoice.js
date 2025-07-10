@@ -4,6 +4,7 @@ const InVoice = require("../models/InVoice");
 const addInvoice = (req, res) => {
   const addInvoice = new InVoice({
     in_voice: req.body.in_voice,
+    userID: req.body.userID,
   });
 
   addInvoice
@@ -21,14 +22,15 @@ const addInvoice = (req, res) => {
 
 // Get Next Invoice
 const getNextInvoice = async (req, res) => {
+  const userID = req.params.userID
   try {
-    let latestInvoice = await InVoice.findOne().sort({ in_voice: -1 });
+    let latestInvoice = await InVoice.findOne({ userID }).sort({ in_voice: -1 });
 
     if (!latestInvoice) {
-      latestInvoice = new InVoice({ in_voice: 1 });
+      latestInvoice = new InVoice({ in_voice: 10003, userID });
       await latestInvoice.save();
     } else {
-      latestInvoice = new InVoice({ in_voice: latestInvoice.in_voice});
+      latestInvoice = new InVoice({ in_voice: latestInvoice.in_voice, userID });
       await latestInvoice.save();
     }
 
