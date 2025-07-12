@@ -4,7 +4,7 @@ const inVoice = require("../controller/inVoice");
 
 app.post("/add_inVoice",inVoice.addInvoice );
 
-app.get("/last_inVoice",inVoice.getNextInvoice );
+app.get("/last_inVoice/:userID",inVoice.getNextInvoice );
 
 
 
