@@ -1,9 +1,12 @@
+const dns = require('node:dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']); 
+
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 
-// const uri = "mongodb+srv://aqsashamshad2005:c4qWcdlu61epDEsd@cluster0.2hwuq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// const uri = "mongodb+srv://aqsashamshad2005_db_user:1BVnzEVn1gNhjg5T@avera.e2vui7t.mongodb.net/?appName=Avera"
 const uri = "mongodb+srv://averacollection147:GBN0pCqQ7SMblwbL@cluster0.mhivx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 
@@ -12,6 +15,7 @@ async function main() {
         await mongoose.connect(uri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            family: 4
         });
 
         console.log("Connected to MongoDB!");
