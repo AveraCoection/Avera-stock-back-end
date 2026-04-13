@@ -45,7 +45,8 @@ UserSchema.methods.isValidPassword = async function (password, isStaffEmail = nu
 // };
 
 UserSchema.methods.generateJWT = async function () {
-  console.log("JWT SECRET:", process.env.JWT_SECRET);
+  console.log("JWT SECRET::::::::::::::::", process.env.JWT_SECRET);
+     
   return jwt.sign(
     { email: this.email, role: this.role, userId: this._id },
     process.env.JWT_SECRET,
