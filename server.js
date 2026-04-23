@@ -16,6 +16,7 @@ const cors = require("cors");
 const User = require("./models/users");
 const Product = require("./models/product");
 const reportRoute = require("./router/report");
+const overViewReport = require("./router/overview-report");
 
 require("dotenv").config()
 
@@ -59,6 +60,7 @@ app.use("/api/auth" , userRoutes)
 app.use("/api/cost_price" , costPriceRouter)
 
 app.use("/api/report", reportRoute);
+app.use("/api/overview-report", overViewReport);
 
 // ------------- Signin --------------
 // let userAuthCheck;
